@@ -17,20 +17,20 @@ That's it for installing. The first time you open it, follow the in-app **"First
 The app has a **First-time setup** button that guides you through this with a link to the right page. Here it is in writing too:
 
 ### 1. Create your bot and get a token
-- In the app, click **First-time setup → Open Discord Developer Portal** (or go to https://discord.com/developers/applications).
+- In the app, click **First-time setup > Open Discord Developer Portal** (or go to https://discord.com/developers/applications).
 - Click **New Application**, name it anything, then open the **Bot** tab.
 - Click **Reset Token**, then **Copy**. Paste it into the app's **Bot token** box.
 - On the same page, turn on **Server Members Intent**.
 
 ### 2. Add the bot to your server
-- Open the **OAuth2 → URL Generator** tab.
+- Open the **OAuth2 > URL Generator** tab.
 - Tick **bot**, then tick the permissions for the actions you want: **Ban Members**, **Kick Members**, **Mute Members**, **Deafen Members**.
 - Copy the link at the bottom, open it in your browser, and add the bot to your server.
-- In **Server Settings → Roles**, drag the bot's role **above** the people you want to moderate. (A bot can't ban/kick someone whose role sits above its own.)
+- In **Server Settings > Roles**, drag the bot's role **above** the people you want to moderate. (A bot can't ban/kick someone whose role sits above its own.)
 
 ### 3. Get your Server ID
-- In Discord: **User Settings → Advanced → Developer Mode** → turn **on**.
-- Right-click your server's icon → **Copy Server ID**. Paste it into the app.
+- In Discord: **User Settings > Advanced > Developer Mode** > turn **on**.
+- Right-click your server's icon > **Copy Server ID**. Paste it into the app.
 
 ### 4. Pick your target and bind your keys
 - Type the person's Discord username into **Target handle**, then click **Resolve & Save target**.
@@ -58,14 +58,15 @@ The app runs quietly in the background:
 - **Instant, no confirmation** - a hotkey runs immediately (that's the point). The on-screen **Run now** buttons ask for confirmation on Ban/Kick if you'd rather click.
 - **System tray** - closing the window tucks the app into the tray (next to the clock). Right-click for **Open settings**, **Start with Windows**, and **Quit**. (Quit is the only thing that fully stops it.)
 - **Start with Windows** - tick the checkbox (or tray item) and the app launches into the tray each time you log in, so your binds are always ready.
+- **Light or dark** - toggle the theme with the **Dark mode** checkbox; your choice is remembered.
 
-> Hotkeys fire instantly with no confirmation, so pick combos you won't hit by accident. If you ban or kick the wrong person, you can undo it from Discord's **Server Settings → Bans** (or just re-invite a kicked user).
+> Hotkeys fire instantly with no confirmation, so pick combos you won't hit by accident. If you ban or kick the wrong person, you can undo it from Discord's **Server Settings > Bans** (or just re-invite a kicked user).
 
 ### Mouse buttons, Stream Deck, and macro keys
 
 The app listens for **keyboard** shortcuts. To trigger an action from a mouse side-button, a Stream Deck key, or a macro keypad, use that device's own software to send the keyboard shortcut you bound in the app:
 
-- **Stream Deck** - add a **Hotkey** action to a button and set it to your bound combo (e.g. Ctrl+Alt+B). Pressing the Stream Deck key then fires the action. (You can also use **Open** / **System → Run** to launch the app.)
+- **Stream Deck** - add a **Hotkey** action to a button and set it to your bound combo (e.g. Ctrl+Alt+B). Pressing the Stream Deck key then fires the action. (You can also use **Open** / **System > Run** to launch the app.)
 - **Gaming mice / keyboards** (Logitech G HUB, Razer Synapse, Corsair iCUE, etc.) - bind the extra button to a **keystroke / macro** of your combo.
 - **Any macro tool** (AutoHotkey, etc.) - map the input to send the same key combo.
 
@@ -95,7 +96,7 @@ pip install -r requirements.txt
 python ban_gui.py
 ```
 
-Tests: `python run_tests.py` runs fast smoke tests (no display or Windows needed). These also run automatically on every push via `.github/workflows/ci.yml`. The recommended flow is: push → CI goes green → use the **Actions** tab to run "Build Windows app" manually and test the resulting artifact → only then draft a release.
+Tests: `python run_tests.py` runs fast smoke tests (no display or Windows needed). These also run automatically on every push via `.github/workflows/ci.yml`. The recommended flow is: push > CI goes green > use the **Actions** tab to run "Build Windows app" manually and test the resulting artifact > only then draft a release.
 
 Build a `.exe` yourself (on Windows):
 ```

@@ -3,6 +3,7 @@
   "guild_id": "YOUR_SERVER_ID_HERE",
   "target_user_id": "",
   "target_handle": "",
+  "theme": "dark",
   "binds": {
     "ban": { "label": "Ctrl+Alt+B", "mods": ["ctrl", "alt"], "vk": 66 },
     "kick": null,

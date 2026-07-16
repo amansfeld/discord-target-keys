@@ -208,7 +208,7 @@ def keysym_to_key(keysym):
 
 
 def is_typing_key(key):
-    """True for keys you'd normally type (letters, digits, punctuation…)."""
+    """True for keys you'd normally type (letters, digits, punctuation...)."""
     if len(key) == 1 and (key.isalpha() or key.isdigit()):
         return True
     return key.upper() in _TYPING_NAMES
@@ -370,15 +370,40 @@ class BanApp(tk.Tk):
         self.binds = self._load_binds()
         self.bind_vars = {}       # action -> StringVar showing current bind
         self.autostart_var = tk.BooleanVar(value=is_autostart_enabled())
+        self.dark_var = tk.BooleanVar(value=self.cfg.get("theme", "dark") == "dark")
         self.hotkeys = None
         self.tray = None
         self._build()
+        self._apply_theme("dark" if self.dark_var.get() else "light")
         self.protocol("WM_DELETE_WINDOW", self.hide_to_tray)
         if IS_WINDOWS:
             self._start_hotkeys()
             self._start_tray()
             if start_hidden:
                 self.withdraw()
+
+    # ---- theming ----
+    def _apply_theme(self, theme):
+        """Apply the modern Sun Valley theme (falls back silently if absent)."""
+        try:
+            import sv_ttk
+            sv_ttk.set_theme("dark" if theme == "dark" else "light")
+        except Exception:
+            pass
+
+    def _theme_bg(self):
+        try:
+            from tkinter import ttk as _ttk
+            return _ttk.Style().lookup("TFrame", "background") or self.cget("background")
+        except Exception:
+            return self.cget("background")
+
+    def toggle_theme(self):
+        theme = "dark" if self.dark_var.get() else "light"
+        self.cfg["theme"] = theme
+        self._collect()
+        save_config(self.cfg)
+        self._apply_theme(theme)
 
     # ---- binds model ----
     @staticmethod
@@ -431,7 +456,7 @@ class BanApp(tk.Tk):
         ttk.Label(frm, text="Bot token").grid(row=0, column=0, sticky="w", **pad)
         self.token_var = tk.StringVar(value=self.cfg.get("bot_token", ""))
         self.token_entry = ttk.Entry(frm, textvariable=self.token_var,
-                                     width=46, show="•")
+                                     width=46, show="*")
         self.token_entry.grid(row=0, column=1, **pad)
         self.show_var = tk.BooleanVar(value=False)
         ttk.Checkbutton(frm, text="Show", variable=self.show_var,
@@ -449,7 +474,7 @@ class BanApp(tk.Tk):
 
         ttk.Label(frm, text="Resolved ID").grid(row=3, column=0, sticky="w", **pad)
         self.id_var = tk.StringVar(value=self.cfg.get("target_user_id", ""))
-        ttk.Label(frm, textvariable=self.id_var, foreground="#555").grid(
+        ttk.Label(frm, textvariable=self.id_var).grid(
             row=3, column=1, columnspan=2, sticky="w", **pad)
 
         ttk.Button(frm, text="First-time setup - need help getting these?",
@@ -467,7 +492,7 @@ class BanApp(tk.Tk):
         tbl = ttk.LabelFrame(frm, text="Actions & hotkeys")
         tbl.grid(row=6, column=0, columnspan=3, sticky="ew", padx=10, pady=(8, 4))
         for col, head in enumerate(("Action", "Hotkey", "", "", "")):
-            ttk.Label(tbl, text=head, foreground="#666").grid(
+            ttk.Label(tbl, text=head, foreground="#888888").grid(
                 row=0, column=col, padx=6, pady=(4, 2), sticky="w")
         for r, action in enumerate(ACTIONS, start=1):
             label = ACTIONS[action][0]
@@ -496,13 +521,16 @@ class BanApp(tk.Tk):
             opt, text="Start with Windows (runs in the system tray)",
             variable=self.autostart_var, command=self.toggle_autostart)
         self.autostart_chk.grid(row=0, column=0, sticky="w")
+        ttk.Checkbutton(opt, text="Dark mode", variable=self.dark_var,
+                        command=self.toggle_theme).grid(row=0, column=1,
+                                                        sticky="e", padx=(20, 0))
         if not IS_WINDOWS:
             self.autostart_chk.state(["disabled"])
             ttk.Label(opt, text="(Hotkeys & auto-start work on Windows.)",
                       foreground="#888").grid(row=1, column=0, sticky="w")
 
         self.status = tk.StringVar(value="Ready.")
-        ttk.Label(frm, textvariable=self.status, foreground="#2c3e50",
+        ttk.Label(frm, textvariable=self.status,
                   wraplength=440, justify="left").grid(
             row=8, column=0, columnspan=3, sticky="w", **pad)
 
@@ -513,13 +541,14 @@ class BanApp(tk.Tk):
                                        sticky="w", padx=10, pady=(2, 0))
 
     def _toggle_token(self):
-        self.token_entry.config(show="" if self.show_var.get() else "•")
+        self.token_entry.config(show="" if self.show_var.get() else "*")
 
     def show_help(self):
         win = tk.Toplevel(self)
         win.title("First-time setup")
         win.resizable(False, False)
         win.transient(self)
+        win.configure(bg=self._theme_bg())
         frm = ttk.Frame(win)
         frm.grid(row=0, column=0, padx=16, pady=16)
         ttk.Label(frm, text=SETUP_STEPS, justify="left").grid(
@@ -537,13 +566,14 @@ class BanApp(tk.Tk):
         win.title(f"Bind: {ACTIONS[action][0]}")
         win.resizable(False, False)
         win.transient(self)
+        win.configure(bg=self._theme_bg())
         frm = ttk.Frame(win)
         frm.grid(row=0, column=0, padx=22, pady=20)
-        prompt = tk.StringVar(value="Press any key or combination…")
+        prompt = tk.StringVar(value="Press any key or combination...")
         ttk.Label(frm, textvariable=prompt,
                   font=("Helvetica", 12, "bold")).grid(row=0, column=0)
         ttk.Label(frm, foreground="#888",
-                  text="Esc = cancel   •   Backspace = clear this bind").grid(
+                  text="Esc = cancel  |  Backspace = clear this bind").grid(
             row=1, column=0, pady=(8, 0))
 
         held = set()
@@ -557,8 +587,8 @@ class BanApp(tk.Tk):
             if ks in _KEYSYM_MODS:
                 held.add(_KEYSYM_MODS[ks])
                 mods = [m for m in MOD_ORDER if m in held]
-                prompt.set("+".join(MOD_LABELS[m] for m in mods) + "+…"
-                           if mods else "Press any key or combination…")
+                prompt.set("+".join(MOD_LABELS[m] for m in mods) + "+..."
+                           if mods else "Press any key or combination...")
                 return
             if ks == "Escape":
                 win.destroy()
