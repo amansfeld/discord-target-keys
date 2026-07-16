@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Discord Target Keys — settings window, system tray, and global hotkeys.
+"""Discord Target Keys - settings window, system tray, and global hotkeys.
 
 Set a bot token, server (guild) ID, and a target user (by handle). Bind a
-global hotkey to each action — Ban, Kick, Mute, Deafen — and trigger them
+global hotkey to each action - Ban, Kick, Mute, Deafen - and trigger them
 from anywhere, even with the window closed. The app lives in the system
 tray and can optionally start with Windows.
 
@@ -452,7 +452,7 @@ class BanApp(tk.Tk):
         ttk.Label(frm, textvariable=self.id_var, foreground="#555").grid(
             row=3, column=1, columnspan=2, sticky="w", **pad)
 
-        ttk.Button(frm, text="First-time setup — need help getting these?",
+        ttk.Button(frm, text="First-time setup - need help getting these?",
                    command=self.show_help).grid(
             row=4, column=0, columnspan=3, sticky="ew", padx=10, pady=(2, 8))
 
@@ -674,7 +674,7 @@ class BanApp(tk.Tk):
         self._run_bg(lambda: self._do_action(action))
 
     def _trigger_by_id(self, hotkey_id):
-        """Triggered by a global hotkey — silent, no dialogs."""
+        """Triggered by a global hotkey - silent, no dialogs."""
         for action, (_, hid, _) in ACTIONS.items():
             if hid == hotkey_id:
                 self._run_bg(lambda a=action: self._do_action(a))

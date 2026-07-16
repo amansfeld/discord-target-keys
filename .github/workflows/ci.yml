@@ -2,7 +2,7 @@ name: CI
 
 # Fast safety net: on every push and pull request, check that the code
 # compiles and the smoke tests pass. This catches typos, broken imports,
-# and logic regressions in seconds — before you ever build or release.
+# and logic regressions in seconds - before you ever build or release.
 
 on:
   push:

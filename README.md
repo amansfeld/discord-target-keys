@@ -1,6 +1,6 @@
 # Discord Target Keys
 
-A tiny Windows app that lets you **ban, kick, mute, or deafen** a pre-set person on your Discord server with a keyboard shortcut — bound like a game keybind. You pick one target, bind your keys, and moderate them from anywhere. No coding, no setup tools — just download, paste in a token, and pick your keys.
+A tiny Windows app that lets you **ban, kick, mute, or deafen** a pre-set person on your Discord server with a keyboard shortcut - bound like a game keybind. You pick one target, bind your keys, and moderate them from anywhere. No coding, no setup tools - just download, paste in a token, and pick your keys.
 
 ## Download (for most people)
 
@@ -8,7 +8,7 @@ A tiny Windows app that lets you **ban, kick, mute, or deafen** a pre-set person
 2. Under the latest release, click **DiscordTargetKeys.exe** to download it.
 3. Double-click the downloaded file to open the app.
 
-> **Windows may show a blue "Windows protected your PC" warning.** This is normal for small free apps that aren't signed by a big company — it doesn't mean anything is wrong. Click **More info**, then **Run anyway**.
+> **Windows may show a blue "Windows protected your PC" warning.** This is normal for small free apps that aren't signed by a big company - it doesn't mean anything is wrong. Click **More info**, then **Run anyway**.
 
 That's it for installing. The first time you open it, follow the in-app **"First-time setup"** button, which walks you through the steps below.
 
@@ -34,7 +34,7 @@ The app has a **First-time setup** button that guides you through this with a li
 
 ### 4. Pick your target and bind your keys
 - Type the person's Discord username into **Target handle**, then click **Resolve & Save target**.
-- In the **Actions & hotkeys** table, click **Change bind** next to Ban / Kick / Mute / Deafen and press any key or combination — just like binding a key in a game. Press **Esc** to cancel or **Backspace** to clear a bind.
+- In the **Actions & hotkeys** table, click **Change bind** next to Ban / Kick / Mute / Deafen and press any key or combination - just like binding a key in a game. Press **Esc** to cancel or **Backspace** to clear a bind.
 
 To change the target later, just type a new username and resolve again.
 
@@ -53,11 +53,11 @@ To change the target later, just type a new username and resolve again.
 
 The app runs quietly in the background:
 
-- **Bind like a game** — click **Change bind**, then press your key or combo. Each action gets its own hotkey, and they fire from anywhere — even with the window closed.
-- **Bind almost any key** — letters, numbers, F1–F24, punctuation, numpad keys, and navigation keys all work, with or without Ctrl/Alt/Shift/Win. (You'll get a warning if you bind a plain typing key with no modifier, since it would be captured everywhere.)
-- **Instant, no confirmation** — a hotkey runs immediately (that's the point). The on-screen **Run now** buttons ask for confirmation on Ban/Kick if you'd rather click.
-- **System tray** — closing the window tucks the app into the tray (next to the clock). Right-click for **Open settings**, **Start with Windows**, and **Quit**. (Quit is the only thing that fully stops it.)
-- **Start with Windows** — tick the checkbox (or tray item) and the app launches into the tray each time you log in, so your binds are always ready.
+- **Bind like a game** - click **Change bind**, then press your key or combo. Each action gets its own hotkey, and they fire from anywhere - even with the window closed.
+- **Bind almost any key** - letters, numbers, F1-F24, punctuation, numpad keys, and navigation keys all work, with or without Ctrl/Alt/Shift/Win. (You'll get a warning if you bind a plain typing key with no modifier, since it would be captured everywhere.)
+- **Instant, no confirmation** - a hotkey runs immediately (that's the point). The on-screen **Run now** buttons ask for confirmation on Ban/Kick if you'd rather click.
+- **System tray** - closing the window tucks the app into the tray (next to the clock). Right-click for **Open settings**, **Start with Windows**, and **Quit**. (Quit is the only thing that fully stops it.)
+- **Start with Windows** - tick the checkbox (or tray item) and the app launches into the tray each time you log in, so your binds are always ready.
 
 > Hotkeys fire instantly with no confirmation, so pick combos you won't hit by accident. If you ban or kick the wrong person, you can undo it from Discord's **Server Settings → Bans** (or just re-invite a kicked user).
 
@@ -65,29 +65,29 @@ The app runs quietly in the background:
 
 The app listens for **keyboard** shortcuts. To trigger an action from a mouse side-button, a Stream Deck key, or a macro keypad, use that device's own software to send the keyboard shortcut you bound in the app:
 
-- **Stream Deck** — add a **Hotkey** action to a button and set it to your bound combo (e.g. Ctrl+Alt+B). Pressing the Stream Deck key then fires the action. (You can also use **Open** / **System → Run** to launch the app.)
-- **Gaming mice / keyboards** (Logitech G HUB, Razer Synapse, Corsair iCUE, etc.) — bind the extra button to a **keystroke / macro** of your combo.
-- **Any macro tool** (AutoHotkey, etc.) — map the input to send the same key combo.
+- **Stream Deck** - add a **Hotkey** action to a button and set it to your bound combo (e.g. Ctrl+Alt+B). Pressing the Stream Deck key then fires the action. (You can also use **Open** / **System → Run** to launch the app.)
+- **Gaming mice / keyboards** (Logitech G HUB, Razer Synapse, Corsair iCUE, etc.) - bind the extra button to a **keystroke / macro** of your combo.
+- **Any macro tool** (AutoHotkey, etc.) - map the input to send the same key combo.
 
 This works with any device that can send a keystroke, so you're not limited to a specific brand.
 
 ## Notes & safety
 
 - Your bot token is saved only on your own computer (in your Windows user folder), never uploaded anywhere.
-- Keep your bot token private — anyone who has it can control your bot.
+- Keep your bot token private - anyone who has it can control your bot.
 - If an action fails, the app tells you why. The most common reasons are the bot's role sitting below the target's role, a missing permission, or (for mute/deafen) the target not being in voice.
 
 ---
 
 ## For developers / building it yourself
 
-The app is a small Python program; the downloadable `.exe` is built automatically by GitHub Actions on a Windows runner — see `.github/workflows/build-windows.yml`.
+The app is a small Python program; the downloadable `.exe` is built automatically by GitHub Actions on a Windows runner - see `.github/workflows/build-windows.yml`.
 
 Files:
-- `ban_gui.py` — the GUI and tray/hotkey app (this is what gets packaged into the `.exe`).
-- `ban.py` — small headless ban script (legacy; bans the saved target when run).
-- `discord_api.py` — Discord REST API helpers (ban, kick, mute, deafen, handle lookup).
-- `config.example.json` — template config; the real `config.json` is gitignored.
+- `ban_gui.py` - the GUI and tray/hotkey app (this is what gets packaged into the `.exe`).
+- `ban.py` - small headless ban script (legacy; bans the saved target when run).
+- `discord_api.py` - Discord REST API helpers (ban, kick, mute, deafen, handle lookup).
+- `config.example.json` - template config; the real `config.json` is gitignored.
 
 Run from source:
 ```

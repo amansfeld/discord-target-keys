@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Instant ban — bind this to a keyboard hotkey.
+"""Instant ban - bind this to a keyboard hotkey.
 
 Running this script bans the target user saved in config.json with no
 prompts. Configure the target first using ban_gui.py.
@@ -40,7 +40,7 @@ def main():
     cfg = load_config()
     missing = [k for k in ("bot_token", "guild_id", "target_user_id") if not cfg.get(k)]
     if missing:
-        notify("Discord Ban — not configured",
+        notify("Discord Ban - not configured",
                "Run ban_gui.py and set: " + ", ".join(missing))
         return 1
 
@@ -48,10 +48,10 @@ def main():
     try:
         ban_user(cfg["bot_token"], cfg["guild_id"], cfg["target_user_id"])
     except Exception as e:
-        notify("Discord Ban — FAILED", f"{label}: {e}")
+        notify("Discord Ban - FAILED", f"{label}: {e}")
         return 1
 
-    notify("Discord Ban — success", f"Banned {label}.")
+    notify("Discord Ban - success", f"Banned {label}.")
     return 0
 
 

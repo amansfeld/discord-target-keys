@@ -1,4 +1,4 @@
-# Never commit your real config — it contains your bot token
+# Never commit your real config - it contains your bot token
 config.json
 
 # Python
@@ -6,3 +6,9 @@ __pycache__/
 *.pyc
 .venv/
 venv/
+
+# Temporary files from FUSE-mounted editing
+.fuse_hidden*
+
+# macOS
+.DS_Store

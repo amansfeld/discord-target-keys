@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Lightweight smoke tests — run on every push by CI and locally.
+"""Lightweight smoke tests - run on every push by CI and locally.
 
 No display or Windows needed: tkinter is stubbed and all Discord HTTP calls
 are mocked. Run with:  python run_tests.py

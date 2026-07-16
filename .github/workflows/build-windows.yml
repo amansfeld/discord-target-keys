@@ -8,7 +8,7 @@ name: Build Windows app
 #   2. Click "Draft a new release".
 #   3. Under "Choose a tag", type a version like v1.0 and click "Create new tag".
 #   4. Give it a title, then click "Publish release".
-#   5. Wait ~2-3 minutes. Refresh the release page — DiscordTargetKeys.exe
+#   5. Wait ~2-3 minutes. Refresh the release page - DiscordTargetKeys.exe
 #      will appear as a downloadable file.
 #
 # You can also run it manually from the "Actions" tab (Run workflow) to get a
