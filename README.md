@@ -82,12 +82,13 @@ This works with any device that can send a keystroke, so you're not limited to a
 
 ## For developers / building it yourself
 
-The app is a small Python program; the downloadable `.exe` is built automatically by GitHub Actions on a Windows runner - see `.github/workflows/build-windows.yml`.
+The app is a small Python program. The downloadable `.exe` is built automatically by GitHub Actions on a Windows runner - see `.github/workflows/build-windows.yml`.
 
 Files:
 - `ban_gui.py` - the GUI and tray/hotkey app (this is what gets packaged into the `.exe`).
-- `ban.py` - small headless ban script (legacy; bans the saved target when run).
+- `ban.py` - command-line script that bans the saved target without opening the GUI (an older approach, still usable with external hotkey tools).
 - `discord_api.py` - Discord REST API helpers (ban, kick, mute, deafen, handle lookup).
+- `run_tests.py` - smoke tests.
 - `config.example.json` - template config; the real `config.json` is gitignored.
 
 Run from source:
@@ -96,12 +97,19 @@ pip install -r requirements.txt
 python ban_gui.py
 ```
 
-Tests: `python run_tests.py` runs fast smoke tests (no display or Windows needed). These also run automatically on every push via `.github/workflows/ci.yml`. The recommended flow is: push > CI goes green > use the **Actions** tab to run "Build Windows app" manually and test the resulting artifact > only then draft a release.
+### Tests
+
+`python run_tests.py` runs fast smoke tests with no display or Windows needed: tkinter is stubbed and all Discord HTTP calls are mocked. They cover the API helpers (including error messages for missing permissions and voice state), hotkey parsing and key mapping, and migration of saved binds from older versions. CI runs them on every push and pull request (`.github/workflows/ci.yml`).
+
+### Release flow
+
+1. Push your changes and wait for CI to pass.
+2. In the **Actions** tab, run **Build Windows app** manually and test the resulting artifact.
+3. On GitHub, **Draft a new release**, create a tag like `v0.3.0`, and **Publish**.
+4. The workflow builds `DiscordTargetKeys.exe` and attaches it to the release automatically.
 
 Build a `.exe` yourself (on Windows):
 ```
-pip install pyinstaller requests pystray pillow
-pyinstaller --onefile --windowed --name DiscordTargetKeys --hidden-import=pystray._win32 ban_gui.py
+pip install -r requirements.txt pyinstaller
+pyinstaller --onefile --windowed --name DiscordTargetKeys --hidden-import=pystray._win32 --collect-all sv_ttk ban_gui.py
 ```
-
-Publish a new downloadable build: on GitHub, **Draft a new release**, create a tag like `v0.3.0`, and **Publish**. The workflow builds `DiscordTargetKeys.exe` and attaches it to that release automatically.
