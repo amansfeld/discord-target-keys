@@ -1,6 +1,6 @@
 # Discord Target Keys
 
-A tiny Windows app that lets you **ban, kick, mute, or deafen** a pre-set person on your Discord server with a keyboard shortcut - bound like a game keybind. You pick one target, bind your keys, and moderate them from anywhere. No coding, no setup tools - just download, paste in a token, and pick your keys.
+A tiny Windows app that lets you **ban, kick, mute, or deafen** a pre-set person on your Discord server with a keyboard shortcut. You pick one target, bind your keys, and moderate them from anywhere. No coding, no setup tools - just download, paste in a token, and pick your keys.
 
 ## Download (for most people)
 
@@ -34,7 +34,7 @@ The app has a **First-time setup** button that guides you through this with a li
 
 ### 4. Pick your target and bind your keys
 - Type the person's Discord username into **Target handle**, then click **Resolve & Save target**.
-- In the **Actions & hotkeys** table, click **Change bind** next to Ban / Kick / Mute / Deafen and press any key or combination - just like binding a key in a game. Press **Esc** to cancel or **Backspace** to clear a bind.
+- In the **Actions & hotkeys** table, click **Change bind** next to Ban / Kick / Mute / Deafen and press any key or combination. Press **Esc** to cancel or **Backspace** to clear a bind.
 
 To change the target later, just type a new username and resolve again.
 
@@ -53,7 +53,7 @@ To change the target later, just type a new username and resolve again.
 
 The app runs quietly in the background:
 
-- **Bind like a game** - click **Change bind**, then press your key or combo. Each action gets its own hotkey, and they fire from anywhere - even with the window closed.
+- **Bind your keys** - click **Change bind**, then press your key or combo. Each action gets its own hotkey, and they fire from anywhere - even with the window closed.
 - **Bind almost any key** - letters, numbers, F1-F24, punctuation, numpad keys, and navigation keys all work, with or without Ctrl/Alt/Shift/Win. (You'll get a warning if you bind a plain typing key with no modifier, since it would be captured everywhere.)
 - **Instant, no confirmation** - a hotkey runs immediately (that's the point). The on-screen **Run now** buttons ask for confirmation on Ban/Kick if you'd rather click.
 - **System tray** - closing the window tucks the app into the tray (next to the clock). Right-click for **Open settings**, **Start with Windows**, and **Quit**. (Quit is the only thing that fully stops it.)

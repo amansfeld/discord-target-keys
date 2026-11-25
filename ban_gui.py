@@ -560,7 +560,7 @@ class BanApp(tk.Tk):
         ttk.Button(frm, text="Close", command=win.destroy).grid(
             row=1, column=1, padx=4, sticky="e")
 
-    # ---- game-style key capture ----
+    # ---- key capture ----
     def capture_bind(self, action):
         win = tk.Toplevel(self)
         win.title(f"Bind: {ACTIONS[action][0]}")
